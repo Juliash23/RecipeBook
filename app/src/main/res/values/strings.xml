@@ -2,4 +2,7 @@
     <string name="app_name">KadRecipe</string>
     <string name="kadRecipe">KadRecipe</string>
     <string name="description_welcome">Твоя личная книга рецептов</string>
+    <string name="all_recipes">Все рецепты</string>
+    <string name="filter">Фильтр</string>
+    <string name="favourites">Избранное</string>
 </resources>
