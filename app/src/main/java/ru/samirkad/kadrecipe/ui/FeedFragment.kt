@@ -1,14 +1,12 @@
-package ru.samirkad.kadrecipe
+package ru.samirkad.kadrecipe.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ru.samirkad.kadrecipe.R
 
-class MainActivity : AppCompatActivity() {
+class FeedFragment : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        supportActionBar?.hide()
-
-
+        setContentView(R.layout.feed_fragment)
     }
 }
