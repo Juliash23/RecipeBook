@@ -19,4 +19,8 @@
     <string name="search">Поиск</string>
     <string name="add_recipe">Добавьте рецепт</string>
     <string name="cancel_filters">Сбросить фильтр</string>
+    <string name="delete">Удалить</string>
+    <string name="menu_edit">Изменить</string>
+    <string name="avatar_description">Avatar description</string>
+    <string name="description_post_menu">Post menu</string>
 </resources>
