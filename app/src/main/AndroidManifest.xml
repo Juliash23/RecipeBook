@@ -14,21 +14,21 @@
         android:theme="@style/Theme.KadRecipe"
         tools:targetApi="31">
         <activity
-            android:name=".ui.FeedFragment"
+            android:name=".view.FeedFragment"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.AppActivity"
+            android:name=".view.AppActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.SplashScreen"
+            android:name=".view.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package ru.samirkad.kadrecipe.ui
+package ru.samirkad.kadrecipe.view
 
 import android.content.Intent
 import android.os.Bundle

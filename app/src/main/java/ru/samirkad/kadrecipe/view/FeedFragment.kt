@@ -1,4 +1,4 @@
-package ru.samirkad.kadrecipe.ui
+package ru.samirkad.kadrecipe.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
