@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import ru.samirkad.kadrecipe.adapter.RecipesAdapter
 import ru.samirkad.kadrecipe.databinding.FavouriteFragmentBinding
+import ru.samirkad.kadrecipe.model.RecipeDto
 import ru.samirkad.kadrecipe.viewModel.RecipeViewModel
 
 class FavouriteRecipeFragment : Fragment() {
@@ -35,14 +38,33 @@ class FavouriteRecipeFragment : Fragment() {
         }
 
         favouriteRecipeViewModel.separateRecipeViewEvent.observe(viewLifecycleOwner) { recipeCardId ->
-            val direction = Fav
-
-
-
-
-
+            val direction =
+                FavouriteRecipeFragmentDirections.actionFavouriteRecipeFragmentToSeparateRecipeFragment(
+                    recipeCardId
+                )
+            findNavController().navigate(direction)
         }
 
-    }
+        favouriteRecipeViewModel.navigateRecipe.observe(viewLifecycleOwner) { recipe ->
+            val direction =
+                FavouriteRecipeFragmentDirections.actionFavouriteRecipeFragmentToNewOrEditedRecipeFragment(
+                    recipe
+                )
+            findNavController().navigate(direction)
+        }
+    }.root
 
+    override fun onResume() {
+        super.onResume()
+
+        setFragmentResultListener(
+            requestKey = NewOrEditRecipe.REQUEST_KEY
+        ) {requestKey, bundle ->
+            if(requestKey != NewOrEditRecipe.REQUEST_KEY) return@setFragmentResultListener
+            val newRecipe = bundle.getParcelable<RecipeDto>(
+                NewOrEditRecipe.RESULT_KEY
+            ) ?: return@setFragmentResultListener
+            favouriteRecipeViewModel.onSaveButtonClicked(newRecipe)
+        }
+    }
 }

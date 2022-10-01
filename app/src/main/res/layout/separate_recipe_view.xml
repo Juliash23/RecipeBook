@@ -15,7 +15,7 @@
         android:orientation="vertical" >
 
         <include
-            android:id="@+id/recipe_view"
+            android:id="@+id/separateRecipeView"
             layout="@layout/recipe" />
 
         <TextView

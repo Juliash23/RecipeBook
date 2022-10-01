@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/separateRecipeFragment"
         android:name="ru.samirkad.kadrecipe.view.SeparateRecipeFragment"
-        tools:layout="@layout/recipe_view">
+        tools:layout="@layout/separate_recipe_view">
         <argument
             android:name="recipeCardId"
             app:argType="long"
