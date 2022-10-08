@@ -1,6 +1,7 @@
 package ru.samirkad.kadrecipe.adapter
 
-import ru.samirkad.kadrecipe.model.RecipeDto
+import ru.samirkad.kadrecipe.dto.RecipeDto
+
 
 interface RecipeInteractionListener {
 

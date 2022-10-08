@@ -22,18 +22,18 @@
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_spacing"
             android:layout_marginEnd="@dimen/medium_spacing"
             android:textSize="16sp"
+            android:padding="16dp"
             tools:text="@string/recipeContent"/>
         
         <ImageView
             android:id="@+id/recipeImage"
-            android:layout_width="311dp"
-            android:layout_height="211dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_spacing"
             android:visibility="visible"
-            tools:srcCompat="@drawable/pelmeni"/>
+            tools:srcCompat="@drawable/food_image"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -1,21 +1,24 @@
 package ru.samirkad.kadrecipe.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.text.TextUtils
 import android.view.*
-import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.AutoCompleteTextView
+import android.widget.SearchView
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import ru.samirkad.kadrecipe.adapter.RecipesAdapter
 import ru.samirkad.kadrecipe.databinding.FeedFragmentBinding
-import ru.samirkad.kadrecipe.model.Category
-import ru.samirkad.kadrecipe.model.RecipeDto
+import ru.samirkad.kadrecipe.dto.Category
+import ru.samirkad.kadrecipe.dto.RecipeDto
 import ru.samirkad.kadrecipe.viewModel.RecipeViewModel
+
 
 class FeedFragment : Fragment() {
 
@@ -34,11 +37,11 @@ class FeedFragment : Fragment() {
         super.onResume()
 
         setFragmentResultListener(
-            requestKey = NewOrEditRecipe.REQUEST_KEY
+            requestKey = NewOrEditedRecipeFragment.REQUEST_KEY
         ) { requestKey, bundle ->
-            if (requestKey != NewOrEditRecipe.REQUEST_KEY) return@setFragmentResultListener
+            if (requestKey != NewOrEditedRecipeFragment.REQUEST_KEY) return@setFragmentResultListener
             val newRecipe = bundle.getParcelable<RecipeDto>(
-                NewOrEditRecipe.RESULT_KEY
+                NewOrEditedRecipeFragment.RESULT_KEY
             ) ?: return@setFragmentResultListener
             viewModel.onSaveButtonClicked(newRecipe)
         }
@@ -81,7 +84,8 @@ class FeedFragment : Fragment() {
                 }
             }
         } else {
-            binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener
+            binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                    androidx.appcompat.widget.SearchView.OnQueryTextListener
             {
 
                 override fun onQueryTextSubmit(query: String?): Boolean {
@@ -101,6 +105,7 @@ class FeedFragment : Fragment() {
 
                     if(recipeList.isEmpty()) {
                         Toast.makeText(context, "Ничего нет", Toast.LENGTH_SHORT).show()
+                        adapter.submitList(recipeList)
                     } else {
                         adapter.submitList(recipeList)
                     }

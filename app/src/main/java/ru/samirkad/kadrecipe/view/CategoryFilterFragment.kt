@@ -10,12 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.samirkad.kadrecipe.adapter.showCategories
 import ru.samirkad.kadrecipe.databinding.CategoryFiltersBinding
-import ru.samirkad.kadrecipe.model.Category
+import ru.samirkad.kadrecipe.dto.Category
 import ru.samirkad.kadrecipe.viewModel.RecipeViewModel
 
 class CategoryFilterFragment : Fragment() {
 
-    private val categoryFilter: RecipeViewModel by viewModels(ownerProducer = ::requireParentFragment)
+    private val categoryFilterViewModel: RecipeViewModel by viewModels(ownerProducer = ::requireParentFragment)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,35 +44,35 @@ class CategoryFilterFragment : Fragment() {
 
         if(binding.checkBoxEuropean.isChecked) {
             categoryList.add(Category.European)
-            categoryFilter.setCategoryFilter = true
+            categoryFilterViewModel.setCategoryFilter = true
         } else {
             --checkedCount
         }
 
         if(binding.checkBoxAsian.isChecked) {
             categoryList.add(Category.Asian)
-            categoryFilter.setCategoryFilter = true
+            categoryFilterViewModel.setCategoryFilter = true
         } else {
             --checkedCount
         }
 
         if(binding.checkBoxEastern.isChecked) {
             categoryList.add(Category.Eastern)
-            categoryFilter.setCategoryFilter = true
+            categoryFilterViewModel.setCategoryFilter = true
         } else {
             --checkedCount
         }
 
         if(binding.checkBoxRussian.isChecked) {
             categoryList.add(Category.Russian)
-            categoryFilter.setCategoryFilter = true
+            categoryFilterViewModel.setCategoryFilter = true
         } else {
             --checkedCount
         }
 
         if(binding.checkBoxAmerican.isChecked) {
             categoryList.add(Category.American)
-            categoryFilter.setCategoryFilter = true
+            categoryFilterViewModel.setCategoryFilter = true
         } else {
             --checkedCount
         }
@@ -80,7 +80,7 @@ class CategoryFilterFragment : Fragment() {
         if(checkedCount == nothingIsChecked) {
             Toast.makeText(activity, "Нельзя убрать все фильтры", Toast.LENGTH_LONG).show()
         } else {
-            categoryFilter.showRecipesCategories(categoryList)
+            categoryFilterViewModel.showRecipesCategories(categoryList)
             val resultBundle = Bundle(1)
             resultBundle.putParcelableArrayList(CHECKBOX_KEY, categoryList)
             setFragmentResult(CHECKBOX_KEY, resultBundle)

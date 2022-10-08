@@ -1,8 +1,9 @@
 package ru.samirkad.kadrecipe.repository
 
 import androidx.lifecycle.MutableLiveData
-import ru.samirkad.kadrecipe.model.Category
-import ru.samirkad.kadrecipe.model.RecipeDto
+import ru.samirkad.kadrecipe.dto.Category
+import ru.samirkad.kadrecipe.dto.RecipeDto
+
 
 object InMemoryRecipe : RecipeRepository {
     private var nextId = 1L
@@ -34,8 +35,7 @@ object InMemoryRecipe : RecipeRepository {
                     "11. Выложить пельмени в тарелку, положить кусочек сливочного масла, поперчить. Можно взбрызнуть уксусом. Классические пельмени готовы, можно подавать. А кто любит и со сметаной.\n" +
                     "\n" +
                     "Приятного аппетита!",
-            addToFavourites = false,
-            foodImage = "@drawable/pelmeni"
+            addToFavourites = false
         ),
         RecipeDto(
             id = nextId++,
@@ -60,19 +60,7 @@ object InMemoryRecipe : RecipeRepository {
     override val data = MutableLiveData(recipes)
 
     override fun save(recipe: RecipeDto) {
-        if(recipe.id == RecipeRepository.NEW_RECIPE_ID)
-            insert(recipe)
-        else
-            update(recipe)
-    }
-
-    private fun insert(recipe: RecipeDto) {
-        recipes = listOf(// оборачиваем в список для того, чтобы наш ИД оказался впереди списка рецептов, а не в конце
-            recipe.copy(
-                id = nextId++
-            )
-        ) + recipes
-        data.value = recipes
+        if(recipe.id == RecipeRepository.NEW_RECIPE_ID) insert(recipe) else update(recipe)
     }
 
     override fun delete(recipeId: Long) {
@@ -114,5 +102,15 @@ object InMemoryRecipe : RecipeRepository {
             else
                 it
         }
+        data.value = recipes
+    }
+
+    private fun insert(recipe: RecipeDto) {
+        recipes = listOf(// оборачиваем в список для того, чтобы наш ИД оказался впереди списка рецептов, а не в конце
+            recipe.copy(
+                id = nextId++
+            )
+        ) + recipes
+        data.value = recipes
     }
 }

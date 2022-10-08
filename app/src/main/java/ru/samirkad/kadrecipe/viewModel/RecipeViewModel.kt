@@ -5,9 +5,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import ru.samirkad.kadrecipe.adapter.RecipeInteractionListener
-import ru.samirkad.kadrecipe.model.Category
+import ru.samirkad.kadrecipe.dto.Category
+import ru.samirkad.kadrecipe.dto.RecipeDto
 import ru.samirkad.kadrecipe.model.MainDb
-import ru.samirkad.kadrecipe.model.RecipeDto
 import ru.samirkad.kadrecipe.repository.RecipeRepository
 import ru.samirkad.kadrecipe.repository.RoomRecipeRepositoryImpl
 import ru.samirkad.kadrecipe.util.SingleLiveEvent
@@ -48,11 +48,12 @@ class RecipeViewModel(
         val newRecipe = currentRecipe.value?.copy(
             content = recipe.content,
             name = recipe.name,
+            author = recipe.author,
             category = recipe.category
         ) ?: RecipeDto(
             id = RecipeRepository.NEW_RECIPE_ID,
-            author = "Автор: Артур Пивоваров",
             name = recipe.name,
+            author = recipe.author,
             category = recipe.category,
             content = recipe.content
         )

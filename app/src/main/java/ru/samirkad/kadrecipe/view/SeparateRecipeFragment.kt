@@ -11,9 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.samirkad.kadrecipe.R
 import ru.samirkad.kadrecipe.adapter.RecipesAdapter
-import ru.samirkad.kadrecipe.databinding.RecipeBinding
 import ru.samirkad.kadrecipe.databinding.SeparateRecipeViewBinding
-import ru.samirkad.kadrecipe.model.RecipeDto
+import ru.samirkad.kadrecipe.dto.RecipeDto
 import ru.samirkad.kadrecipe.viewModel.RecipeViewModel
 
 class SeparateRecipeFragment : Fragment() {
@@ -36,23 +35,25 @@ class SeparateRecipeFragment : Fragment() {
             }
             viewHolder.bind(separatedRecipe)
             binding.content.text = separatedRecipe.content
-            binding.recipeImage.setImageResource(R.drawable.pelmeni)
+            binding.recipeImage.setImageResource(R.drawable.food_image)
             binding.recipeImage.visibility =
                 if(separatedRecipe.foodImage.isBlank()) View.GONE else View.VISIBLE
         }
 
         separateRecipeViewModel.navigateRecipe.observe(viewLifecycleOwner) { recipe ->
             val direction =
-                SeparateRecipeFragmentDirections.actionSeparateRecipeFragmentToNewRecipeFragment(recipe)
+                SeparateRecipeFragmentDirections.actionSeparateRecipeFragmentToNewOrEditedRecipeFragment(
+                    recipe
+                )
                 findNavController().navigate(direction)
         }
 
         setFragmentResultListener(
-            requestKey = NewOrEditRecipe.REQUEST_KEY
+            requestKey = NewOrEditedRecipeFragment.REQUEST_KEY
         ) {requestKey, bundle ->
-            if(requestKey != NewOrEditRecipe.REQUEST_KEY) return@setFragmentResultListener
+            if(requestKey != NewOrEditedRecipeFragment.REQUEST_KEY) return@setFragmentResultListener
             val newRecipe = bundle.getParcelable<RecipeDto>(
-                NewOrEditRecipe.RESULT_KEY
+                NewOrEditedRecipeFragment.RESULT_KEY
             ) ?: return@setFragmentResultListener
             separateRecipeViewModel.onSaveButtonClicked(newRecipe)
         }

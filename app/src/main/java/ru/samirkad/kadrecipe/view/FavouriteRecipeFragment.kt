@@ -10,8 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.samirkad.kadrecipe.adapter.RecipesAdapter
 import ru.samirkad.kadrecipe.databinding.FavouriteFragmentBinding
-import ru.samirkad.kadrecipe.model.RecipeDto
+import ru.samirkad.kadrecipe.dto.RecipeDto
 import ru.samirkad.kadrecipe.viewModel.RecipeViewModel
+
 
 class FavouriteRecipeFragment : Fragment() {
 
@@ -30,7 +31,7 @@ class FavouriteRecipeFragment : Fragment() {
             val favouriteRecipes = recipes.filter { it.addToFavourites }
             adapter.submitList(favouriteRecipes)
 
-            val emptyList = recipes.none() { it.addToFavourites }
+            val emptyList = recipes.none { it.addToFavourites }
             binding.textEmptyList.visibility =
                 if(emptyList) View.VISIBLE else View.GONE
             binding.iconEmptyList.visibility =
@@ -58,11 +59,11 @@ class FavouriteRecipeFragment : Fragment() {
         super.onResume()
 
         setFragmentResultListener(
-            requestKey = NewOrEditRecipe.REQUEST_KEY
+            requestKey = NewOrEditedRecipeFragment.REQUEST_KEY
         ) {requestKey, bundle ->
-            if(requestKey != NewOrEditRecipe.REQUEST_KEY) return@setFragmentResultListener
+            if(requestKey != NewOrEditedRecipeFragment.REQUEST_KEY) return@setFragmentResultListener
             val newRecipe = bundle.getParcelable<RecipeDto>(
-                NewOrEditRecipe.RESULT_KEY
+                NewOrEditedRecipeFragment.RESULT_KEY
             ) ?: return@setFragmentResultListener
             favouriteRecipeViewModel.onSaveButtonClicked(newRecipe)
         }

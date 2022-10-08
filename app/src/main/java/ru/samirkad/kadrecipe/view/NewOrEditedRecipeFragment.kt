@@ -2,27 +2,29 @@ package ru.samirkad.kadrecipe.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.samirkad.kadrecipe.R
 import ru.samirkad.kadrecipe.adapter.showCategories
 import ru.samirkad.kadrecipe.databinding.NewRecipeFragmentBinding
-import ru.samirkad.kadrecipe.model.Category
-import ru.samirkad.kadrecipe.model.RecipeDto
+import ru.samirkad.kadrecipe.dto.Category
+import ru.samirkad.kadrecipe.dto.RecipeDto
 import ru.samirkad.kadrecipe.repository.RecipeRepository
 import ru.samirkad.kadrecipe.viewModel.RecipeViewModel
 
-class NewOrEditRecipe : Fragment() {
 
-    private val args by navArgs<NewOrEditRecipeArgs>()
+class NewOrEditedRecipeFragment : Fragment() {
 
-    private val newOrEditRecipeViewModel: RecipeViewModel by viewModels(ownerProducer = ::requireParentFragment)
+    private val args by navArgs<NewOrEditedRecipeFragmentArgs>()
+
+    private val newOrEditedRecipeViewModel: RecipeViewModel by viewModels(ownerProducer = ::requireParentFragment)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,11 +61,12 @@ class NewOrEditRecipe : Fragment() {
             id = args.currentRecipe?.id ?: RecipeRepository.NEW_RECIPE_ID,
             name = binding.name.text.toString(),
             content = binding.content.text.toString(),
+            author = binding.author.text.toString(),
             category = getCheckedCategory(binding.categoryRecipeCheckBox.checkedRadioButtonId)
         )
         if(emptyFieldsCheck(recipe = currentRecipe)) {
             val resultBundle = Bundle(1)
-            resultBundle.putParcelable(RESULT_KEY, resultBundle)
+            resultBundle.putParcelable(RESULT_KEY, currentRecipe)
             setFragmentResult(REQUEST_KEY, resultBundle)
             findNavController().popBackStack()
         }
@@ -75,11 +78,11 @@ class NewOrEditRecipe : Fragment() {
         R.id.checkBoxEastern -> Category.Eastern
         R.id.checkBoxRussian -> Category.Russian
         R.id.checkBoxAmerican -> Category.American
-        else -> throw java.lang.IllegalArgumentException("Unknown type: $checkedId")
+        else -> throw IllegalArgumentException("Unknown type: $checkedId")
     }
 
     private fun emptyFieldsCheck(recipe: RecipeDto): Boolean {
-        return if (recipe.name.isBlank() && recipe.content.isBlank()) {
+        return if (recipe.name.isBlank() && recipe.content.isBlank() && recipe.author.isBlank()) {
             Toast.makeText(activity, "Заполните все поля", Toast.LENGTH_LONG).show()
             false
         } else true

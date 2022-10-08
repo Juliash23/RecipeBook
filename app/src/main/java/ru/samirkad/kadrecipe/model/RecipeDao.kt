@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import ru.samirkad.kadrecipe.dto.Category
 import ru.samirkad.kadrecipe.repository.RecipeRepository
 
 @Dao
@@ -15,16 +16,16 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(recipe: RecipeEntity)
 
-    @Query("UPDATE recipes SET name = :name, content = :content, category = :category WHERE id = :id")
+    @Query("UPDATE recipes SET name = :name, content = :content, author = :author, category = :category WHERE id = :id")
     fun updateById(
-        id: Long, name: String,
+        id: Long, name: String, author: String,
         content: String, category: Category
     )
 
     fun save(recipe: RecipeEntity) =
         if(recipe.id == RecipeRepository.NEW_RECIPE_ID)
             insert(recipe)
-        else updateById(recipe.id, recipe.name, recipe.content, recipe.category)
+        else updateById(recipe.id, recipe.name, recipe.content, recipe.author,recipe.category)
 
     @Query("DELETE FROM recipes WHERE id = :id")
     fun delete(id: Long)

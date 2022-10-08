@@ -23,8 +23,8 @@
     <string name="menu_edit">Изменить</string>
     <string name="avatar_description">Avatar description</string>
     <string name="description_post_menu">Post menu</string>
-    <string name="title">Title</string>
-    <string name="content_hint">Content</string>
+    <string name="title">Название</string>
+    <string name="content_hint">Рецепт</string>
     <string name="european_type">Европейский</string>
     <string name="asian_type">Азиатский</string>
     <string name="eastern_type">Восточный</string>
@@ -33,4 +33,5 @@
     <string name="recipe_save">Сохранить рецепт</string>
     <string name="recipeContent">Пельмени – знаменитое блюдо русской кухни, имеющее древние китайские, финно-угорские, тюркские и славянские корни.</string>
     <string name="text_empty_list">Здесь ничего нет</string>
+    <string name="author">Автор</string>
 </resources>

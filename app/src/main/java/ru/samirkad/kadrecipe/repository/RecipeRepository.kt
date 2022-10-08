@@ -1,9 +1,9 @@
 package ru.samirkad.kadrecipe.repository
 
 import androidx.lifecycle.LiveData
-import ru.samirkad.kadrecipe.model.Category
-import ru.samirkad.kadrecipe.model.RecipeDao
-import ru.samirkad.kadrecipe.model.RecipeDto
+import ru.samirkad.kadrecipe.dto.Category
+import ru.samirkad.kadrecipe.dto.RecipeDto
+
 
 interface RecipeRepository {
 

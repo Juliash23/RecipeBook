@@ -1,4 +1,4 @@
-package ru.samirkad.kadrecipe.model
+package ru.samirkad.kadrecipe.dto
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @Parcelize
-data class RecipeDto (
+data class RecipeDto(
     val id: Long,
     val name: String,
     val author: String = "",
@@ -14,7 +14,8 @@ data class RecipeDto (
     val content: String,
     val addToFavourites: Boolean = false,
     val foodImage: String = ""
-        ) : Parcelable
+
+) : Parcelable
 
 @Serializable
 @Parcelize

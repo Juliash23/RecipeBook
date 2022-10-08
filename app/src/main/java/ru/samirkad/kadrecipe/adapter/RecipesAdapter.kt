@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.samirkad.kadrecipe.R
 import ru.samirkad.kadrecipe.databinding.RecipeBinding
-import ru.samirkad.kadrecipe.model.Category
-import ru.samirkad.kadrecipe.model.RecipeDto
+import ru.samirkad.kadrecipe.dto.Category
+import ru.samirkad.kadrecipe.dto.RecipeDto
+
 
 class RecipesAdapter(
     private val interactionListener: RecipeInteractionListener
