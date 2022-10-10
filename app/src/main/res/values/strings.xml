@@ -25,9 +25,9 @@
     <string name="description_post_menu">Post menu</string>
     <string name="title">Название</string>
     <string name="content_hint">Рецепт</string>
-    <string name="european_type">Европейский</string>
-    <string name="asian_type">Азиатский</string>
-    <string name="eastern_type">Восточный</string>
+    <string name="european_type">Европейская</string>
+    <string name="asian_type">Азиатская</string>
+    <string name="eastern_type">Восточная</string>
     <string name="russian_type">Русская</string>
     <string name="american_type">Американская</string>
     <string name="recipe_save">Сохранить рецепт</string>
